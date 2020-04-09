@@ -1,0 +1,57 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@setu-023
+setu-023 /
+django-class
+forked from rhasan33/django-class
+
+0
+0
+
+    8
+
+Code
+Pull requests 0
+Actions
+Projects 0
+Wiki
+Security
+Insights
+Settings
+django-class/.editorconfig
+@rhasan33 rhasan33 initial push 19d8991 on Jan 10
+16 lines (13 sloc) 245 Bytes
+# http://editorconfig.org
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.yml]
+indent_size = 2
+
+[*.{md,yml}]
+trim_trailing_whitespace = false
+
+    © 2020 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
