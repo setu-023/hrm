@@ -28,26 +28,50 @@ DEBUG = bool(os.environ.get('DEBUG', True))
 ALLOWED_HOSTS = ['*']
 
 
+
+# # Application definition
+# LOCAL_APPS = [
+
+#     'account',
+# ]
+
+# THIRD_PARTY = [
+#     #'jet',
+#     'rest_framework',
+# ]
+
+# DJANGO_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+# ]
+
+
+# INSTALLED_APPS = THIRD_PARTY + DJANGO_APPS + LOCAL_APPS
+
 # Application definition
-LOCAL_APPS = [
 
-]
-
-THIRD_PARTY = [
-    'jet',
-    'rest_framework',
-]
-
-DJANGO_APPS = [
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+
+    'account',
+ 
+    
+
+
 ]
 
-INSTALLED_APPS = THIRD_PARTY + DJANGO_APPS + LOCAL_APPS
+
+AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,6 +108,7 @@ WSGI_APPLICATION = 'hrm.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
+    
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
