@@ -52,13 +52,9 @@ class Account(AbstractBaseUser):
 	is_staff				= models.BooleanField(default=False)
 	is_superuser			= models.BooleanField(default=False)
 
-	# is_check				= models.BooleanField(default=True)
-	# is_manager				= models.BooleanField(default=True)
-	# is_ceo					= models.BooleanField(default=True)
-
-
-
 	role 					= models.CharField(max_length=30, default = 'user',  )
+	phone 					= models.CharField(max_length=30,null=True )
+
 	status					= models.IntegerField(default=1)
 
 	USERNAME_FIELD = 'email'
