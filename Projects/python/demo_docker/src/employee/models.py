@@ -5,14 +5,14 @@ from base.models import BaseModel
 
 class Employee(BaseModel):
 
-    name                = models.CharField(max_length=250, unique=True)
-    email 	            = models.ForeignKey(to='account.Account', on_delete=models.CASCADE)
+    employee 	        = models.ForeignKey(to='account.Account', on_delete=models.CASCADE)
     possition           = models.CharField(max_length=250, )
     posting             = models.ForeignKey(to='dept_branch.DeptBranch', on_delete = models.CASCADE)
     phone               = models.CharField(max_length=25, unique=True )
     address             = models.TextField()
-    dob                 = models.CharField(max_length=25, unique=True )
-    joining_date        = models.DateTimeField(verbose_name='joining date')
+    dob                 = models.CharField(max_length=25 )
+    joining_date        = models.DateTimeField(null = True, )
     
-    def __str__(self):
-        return self.name
+    email = None
+    name  = None
+

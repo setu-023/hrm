@@ -5,8 +5,8 @@ from base.models import BaseModel
 
 class DeptBranch(BaseModel):
 
-    dept            = models.ForeignKey(to='department.Department', on_delete=models.PROTECT)
-    branch          = models.ForeignKey(to='branch.Branch', on_delete=models.PROTECT)
+    dept            = models.ForeignKey(to='department.Department', on_delete=models.CASCADE)
+    branch          = models.ForeignKey(to='branch.Branch', on_delete=models.CASCADE)
     total_emplooye  = models.IntegerField(default=0)
 
  
