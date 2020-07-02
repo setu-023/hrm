@@ -2,9 +2,10 @@ from rest_framework.permissions import BasePermission
 from rest_framework.exceptions import NotAcceptable, PermissionDenied
 
 
+
 USER_GROUPS = {
     'superuser': [
-        'can_get_users',
+        'can_get_emplooye',
         'can_create_emplooye'
     ],
         'user': [

@@ -4,7 +4,7 @@ from account.models import Account
 
 class AccountSerializer(serializers.ModelSerializer):
 
-
+	
 		class Meta:
 			model = Account
 			fields ='__all__'
@@ -12,6 +12,8 @@ class AccountSerializer(serializers.ModelSerializer):
 				'password': {'write_only': True},
 			}
 			#exclude = ('password',)
+			owner = serializers.ReadOnlyField(source='owner.id')
+
 		def	save(self):
 
 			account = Account(

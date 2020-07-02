@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, CreateAPIView
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 
@@ -15,21 +15,42 @@ class DepartmentListCreateAPIView(ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            return (UserPermission('can_get_users'),)
+            return (UserPermission('can_create_dept'),)
 
         elif self.request.method == 'GET':
             return (permissions.AllowAny(),)
         raise MethodNotAllowed(method=self.request.method)
     
-    
-    
-    def get(self, request, format=None):
-        """
-        Return a list of all users.
-        """
+    def list(self, request, format=None):
+
         dept        = Department.objects.all()
-        
-        # dept        = [dept.name for dept in Department.objects.all()]
         serializer  = DepartmentSerializer(dept, many=True)
 
-        return Response({'data':serializer.data}, status.HTTP_200_OK,)
+        return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
+
+
+class DepartmentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = DepartmentSerializer
+    queryset = Department.objects.all()
+    lookup_field = 'pk'
+
+    def get_permissions(self):
+        if self.request.method == 'PUT' or self.request.method == 'PATCH':
+            return (UserPermission('can_create_dept'),)
+        elif self.request.method == 'GET':
+            return (permissions.AllowAny(),)
+        raise MethodNotAllowed(method=self.request.method)
+
+    def get(self, request, pk, *args, **kwargs):
+
+        dept        = Department.objects.get(id=pk)
+        serializer  = DepartmentSerializer(dept)
+
+        return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
+   
+    def put(self,request,pk,format=None):
+        dept        = Department.objects.get(id=pk)
+        serializer  = DepartmentSerializer(dept, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)

@@ -2,9 +2,12 @@ from django.db import IntegrityError
 from django.contrib.auth.hashers import check_password
 from django.conf import settings
 from rest_framework.exceptions import MethodNotAllowed
-from rest_framework.generics import ListCreateAPIView, CreateAPIView
+from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView,ListAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.http import Http404
+
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -15,7 +18,7 @@ from django.conf import settings
 
 from account.api.serializers import AccountSerializer
 from account.models import Account
-from account.permission import UserPermission
+from account.permission import UserPermission, CustomUpdatePermission
 
 
 class UserListCreateAPIView(ListCreateAPIView):
@@ -134,3 +137,16 @@ class ChangePassword(CreateAPIView):
             'info': f'{user.email} has changed the password'
         }
         return Response(data=resp, status=status.HTTP_201_CREATED)
+
+class AccountListAPIView(ListAPIView):
+    
+    serializer_class = AccountSerializer
+    queryset = Account.objects.filter()
+    permission_classes = (permissions.AllowAny, )
+
+
+    def list(self, request):
+        user = Account.objects.get(id = request.user.id)
+        serializer = AccountSerializer(user)
+        return Response({ "response": status.HTTP_200_OK,"message":"showing data","data":serializer.data}) 
+        
