@@ -133,7 +133,16 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissions',
     ],
 
+    # 'DEFAULT_PAGINATION_CLASS': 'base.pagination.CustomPagination',
+    # 'PAGE_SIZE': 2,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2
+
 }
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 2
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
