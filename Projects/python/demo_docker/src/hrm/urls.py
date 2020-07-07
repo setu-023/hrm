@@ -31,6 +31,8 @@ urlpatterns = [
     path('department/', include('department.urls')),
     path('branch/', include('branch.urls')),
     path('dept_branch/', include('branch.urls')),
+    path('salary/', include('salary.urls')),
+
    
     
     
