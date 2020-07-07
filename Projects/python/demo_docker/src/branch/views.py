@@ -29,7 +29,6 @@ class BranchListCreateAPIView(ListCreateAPIView):
     def create(self, request, *args, **kwargs):
 
         serializer    = BranchSerializer(request.data)
-        #return Response({'message': 'Request is processing'}, status=status.HTTP_200_OK)
         return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
 
     def list(self, request, format=None):
