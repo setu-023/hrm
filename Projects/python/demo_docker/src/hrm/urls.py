@@ -32,6 +32,7 @@ urlpatterns = [
     path('branch/', include('branch.urls')),
     path('dept_branch/', include('branch.urls')),
     path('salary/', include('salary.urls')),
+    path('project/', include('project.urls')),
 
    
     

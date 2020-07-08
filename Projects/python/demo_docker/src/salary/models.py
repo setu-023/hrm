@@ -16,5 +16,5 @@ class Salary(BaseModel):
     Salary_disburse          = models.IntegerField(default=0)
     Salary_disburse_month    = models.IntegerField()
 
-    def __str__(self):
-        return self.employee.name
+    # def __str__(self):
+    #     return self.employee.name

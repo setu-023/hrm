@@ -40,6 +40,8 @@ LOCAL_APPS = [
     'employee',
     'salary',
     'deduction',
+    'project',
+    'projec_detail'
 
 ]
 
@@ -157,6 +159,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
+# celery
+CELERY_BROKER_URL = "redis://{}:6379".format(REDIS_HOST)
+CELERY_RESULT_BACKEND = "redis://{}:6379".format(REDIS_HOST)
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

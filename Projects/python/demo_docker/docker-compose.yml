@@ -38,3 +38,34 @@ services:
       - DB_NAME=hrm
       - DEBUG=True
       - SECRET_KEY=^&0zxq-&3)fqv^p+(^yp^@r5#0q!(5t1u1-zl70tiy1@f*wm0r
+
+  flower:
+    image: mher/flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/
+      - FLOWER_PORT=8888
+    ports:
+      - 5555:8888
+    depends_on:
+      - celery-worker
+
+  celery-worker:
+      build: .
+      links:
+        - db:db
+        - redis:redis
+      command: bash -c "cd src/ && celery -A hrm.celery worker -l info --concurrency=4"
+      depends_on:
+        - db
+        - redis
+      volumes:
+        - ./src:/app/src
+      environment:
+        - DB_HOST=db
+        - DB_USER=hrm
+        - DB_PASS=123456
+        - DB_PORT=5432
+        - DB_NAME=hrm
+        - DEBUG=True
+        - SECRET_KEY=^&0zxq-&3)fqv^p+(^yp^@r5#0q!(5t1u1-zl70tiy1@f*wm0r
+        - REDIS_HOST=redis
