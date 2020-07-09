@@ -141,6 +141,9 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2
 
 }
+
+REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
+
 # REST_FRAMEWORK = {
 #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #     'PAGE_SIZE': 2
@@ -159,7 +162,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-REDIS_HOST = os.environ.get('REDIS_HOST', '127.0.0.1')
 # celery
 CELERY_BROKER_URL = "redis://{}:6379".format(REDIS_HOST)
 CELERY_RESULT_BACKEND = "redis://{}:6379".format(REDIS_HOST)

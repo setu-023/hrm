@@ -6,5 +6,5 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
 	
     class Meta:
         model   = ProjectDetail
-        fields  = ['project_id','employee','dept_branch','role']
+        fields  = ['project','employee','dept_branch','role']
         

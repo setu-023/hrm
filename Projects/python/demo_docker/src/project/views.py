@@ -67,7 +67,7 @@ class ProjectRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
             serializer.save()
             return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
 
-class ProjectCreateAPIView(CreateAPIView):
+class ProjectCreateAPIView(ListCreateAPIView):
 
     queryset = Project.objects.all()
     serializer_class = ProjectWithDetailSerializer
@@ -75,7 +75,12 @@ class ProjectCreateAPIView(CreateAPIView):
     def get_permissions(self):
         if self.request.method == 'POST':
             return (UserPermission('can_create_dept'),)
+
+        elif self.request.method == 'GET':
+            return (permissions.AllowAny(),)
+            
         raise MethodNotAllowed(method=self.request.method)
+   
    
    
     def create(self, request, *args, **kwargs):
@@ -86,3 +91,10 @@ class ProjectCreateAPIView(CreateAPIView):
             serializer.save()
             return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
         return Response({'status':'500', 'msg': ' not okay', 'error':serializer.error},status.HTTP_201_CREATED)
+    
+    def list(self, request, format=None):
+
+        queryset      = Project.objects.all()
+        serializer    = ProjectWithDetailSerializer(queryset, many = True)
+
+        return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)

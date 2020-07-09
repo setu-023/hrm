@@ -1,0 +1,1 @@
+from hrm.celery import *

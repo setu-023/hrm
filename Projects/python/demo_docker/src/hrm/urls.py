@@ -27,12 +27,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('homepage/', views.homePage),
 
+    
+
     path('employee/', include('employee.api.urls')),
     path('department/', include('department.urls')),
     path('branch/', include('branch.urls')),
     path('dept_branch/', include('branch.urls')),
     path('salary/', include('salary.urls')),
     path('project/', include('project.urls')),
+    path('project-detail/', include('projec_detail.urls')),
+
 
    
     
