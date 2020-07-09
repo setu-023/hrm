@@ -5,7 +5,7 @@ from base.models import BaseModel
 
 class Salary(BaseModel):
 
-    employee 	             = models.ForeignKey(to='employee.Employee', on_delete=models.CASCADE)
+    employee 	             = models.ForeignKey(to='employee.Employee', on_delete=models.CASCADE,) #related_name='employee_id')
     house_rent               = models.IntegerField(default=0)
     medical                  = models.IntegerField(default=0)
     transport                = models.IntegerField(default=0)

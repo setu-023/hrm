@@ -12,8 +12,8 @@ from base.permission import UserPermission
 
 class SalaryListCreateAPIView(ListCreateAPIView):
 
-    queryset = Salary.objects.all()
-    serializer_class = SalarySerializer(queryset, many=True)
+    queryset = Salary.objects.filter()
+    serializer_class = SalarySerializer
     
     def get_queryset(self):
         return Mmodel.objects.all()
@@ -29,9 +29,14 @@ class SalaryListCreateAPIView(ListCreateAPIView):
    
     def create(self, request, *args, **kwargs):
 
-        serializer    = SalarySerializer(request.data)
-        return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
+        serializer = SalarySerializer(data=request.data)
 
+        #ifserializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
+        return Response({'code':'400', 'msg': serializer.errors }, status=status.HTTP_400_BAD_REQUEST)
+    
     def list(self, request, format=None):
 
         queryset      = Salary.objects.all()

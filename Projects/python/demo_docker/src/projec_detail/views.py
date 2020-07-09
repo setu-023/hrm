@@ -16,8 +16,8 @@ class ProjectDetailListCreateAPIView(ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         create_project_detail.delay(request.data)
-        return Response({'message': 'Request is processing'}, status=status.HTTP_200_OK)
+        return Response({'cede':'200', 'message': 'Request is processing'}, status=status.HTTP_200_OK)
 
     def list(self, request, *args, **kwargs):
         test_celery.delay(10)
-        return Response({'message': 'Request is processing'}, status=status.HTTP_200_OK)
+        return Response({'cede':'200', 'message': 'Request is processing'}, status=status.HTTP_200_OK)

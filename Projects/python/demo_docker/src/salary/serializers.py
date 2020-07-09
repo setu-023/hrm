@@ -7,5 +7,5 @@ class SalarySerializer(serializers.ModelSerializer):
 
 		class Meta:
 			model = Salary
-			fields = '__all__'
+			fields =  ['id','employee','house_rent','medical','transport','other','bonus','over_time','deduction', 'Salary_disburse', 'Salary_disburse_month']
 
