@@ -6,16 +6,6 @@ from salary.serializers import SalarySerializer
 from salary.models import Salary
 
 
-# @shared_task(name='create_project_detail')
-# def create_project_detail(data: Dict) -> None:
-#     time.sleep(3)
-#     print('saved Project Detail task started!!')
-#     serializer = ProjectDetailSerializer(data=data)
-#     if serializer.is_valid(raise_exception=True):
-#         serializer.save()
-#     print('saved Project Detail task done!!')
-
-
 @shared_task(name='get_total_salary')
 def get_total_salary():
     time.sleep(3)
