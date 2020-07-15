@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 LOCAL_APPS = [
 
     'account',
+    'activity',
     'department',
     'branch',
     'base',

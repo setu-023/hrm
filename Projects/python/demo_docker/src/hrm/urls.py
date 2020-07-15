@@ -28,7 +28,7 @@ urlpatterns = [
     path('homepage/', views.homePage),
 
     
-
+    path('activity/', include('activity.urls')),
     path('employee/', include('employee.api.urls')),
     path('department/', include('department.urls')),
     path('branch/', include('branch.urls')),
