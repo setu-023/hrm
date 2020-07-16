@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-
-from rest_framework.pagination import PageNumberPagination
 
 from branch.models import Branch
 from branch.serializers import BranchSerializer
@@ -32,8 +31,7 @@ class BranchListCreateAPIView(ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
-        return Response({'status':'400', 'msg': 'Please Insert Correct value', 'data':serializer.errors, }, status.HTTP_400_BAD_REQUEST
-,)
+        return Response({'status':'400', 'msg': 'Please Insert Correct value', 'data':serializer.errors, }, status.HTTP_400_BAD_REQUEST,)
 
     def list(self, request, format=None):
 
@@ -78,5 +76,4 @@ class BranchListAPIView(ListAPIView):
     queryset = Branch.objects.all()
     serializer_class = BranchSerializer
     permission_classes = (permissions.AllowAny, )
-
-    pagination_class = PageNumberPagination  
+    # pagination_class = PageNumberPagination  
