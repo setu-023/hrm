@@ -23,7 +23,7 @@ class DeptBranchListCreateAPIView(ListCreateAPIView):
     def create(self, request, *args, **kwargs):
 
 
-        dept_branch = DeptBranch.objects.filter(dept=self.request.data['dept'], branch=self.request.data['branch']) 
+        dept_branch = DeptBranch.objects.filter( dept = self.request.data['dept'], branch = self.request.data['branch']) 
         if dept_branch:
             return Response({'status':'405', 'msg': 'already assigned',}, status.HTTP_405_METHOD_NOT_ALLOWED,)
 
@@ -32,7 +32,7 @@ class DeptBranchListCreateAPIView(ListCreateAPIView):
             serializer.save()
             return Response({'status':'201', 'msg': 'department and branch assigned successfully', 'data': serializer.data },status=status.HTTP_201_CREATED)
 
-        return Response({'status':'400', 'message': 'something went wrong',}, status.HTTP_400_BAD_REQUEST,)
+        return Response({'status':'400', 'message': 'something went wrong', 'data' : serializer.errors}, status.HTTP_400_BAD_REQUEST,)
 
     
     def list(self, request, format=None):
@@ -64,7 +64,7 @@ class DeptBranchRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
    
     def put(self,request,pk,format=None):
         dept        = DeptBranch.objects.get(id=pk)
-        serializer  = DeptBranchSerializer(dept, data=request.data)
+        serializer  = DeptBranchSerializer(dept, data=request.data , partial = True)
         if serializer.is_valid():
             serializer.save()
             return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
