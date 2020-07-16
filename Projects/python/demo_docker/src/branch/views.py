@@ -28,8 +28,12 @@ class BranchListCreateAPIView(ListCreateAPIView):
    
     def create(self, request, *args, **kwargs):
 
-        serializer    = BranchSerializer(request.data)
-        return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
+        serializer    = BranchSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status':'201', 'msg': 'created successfully', 'data':serializer.data, }, status.HTTP_201_CREATED,)
+        return Response({'status':'400', 'msg': 'Please Insert Correct value', 'data':serializer.errors, }, status.HTTP_400_BAD_REQUEST
+,)
 
     def list(self, request, format=None):
 
@@ -59,11 +63,14 @@ class BranchRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
    
     def put(self,request,pk,format=None):
-        branch        = Branch.objects.get(id=pk)
-        serializer  = BranchSerializer(branch, data=request.data)
+
+        branch              = Branch.objects.get(id=pk)
+        serializer          = BranchSerializer(branch, data= request.data, partial = True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'status':'200', 'msg': 'showing data', 'data':serializer.data, }, status.HTTP_200_OK,)
+            return Response({'status':'200', 'msg': 'Branch is updated', 'data':serializer.data, }, status.HTTP_200_OK,)
+        
+        return Response({'status':'400', 'msg': 'Please Insert Correct value', 'data':serializer.errors, }, status.HTTP_400_BAD_REQUEST)
 
 
 class BranchListAPIView(ListAPIView):
