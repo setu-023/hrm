@@ -5,7 +5,7 @@ from employee.views import EmployeeListCreateAPIView, EmployeeRetrieveUpdateAPIV
 
 urlpatterns = [
 	path('', EmployeeListCreateAPIView.as_view(),),
-	path('<int:id>/', EmployeeRetrieveUpdateAPIView.as_view(),),
+	path('<int:pk>/', EmployeeRetrieveUpdateAPIView.as_view(),),
 	path('show', EmployeeListAPIView.as_view(),),
 
 
