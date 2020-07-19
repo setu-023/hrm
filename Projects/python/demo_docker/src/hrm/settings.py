@@ -42,7 +42,8 @@ LOCAL_APPS = [
     'salary',
     'deduction',
     'project',
-    'projec_detail'
+    'projec_detail',
+    'django_celery_beat',
 
 ]
 
