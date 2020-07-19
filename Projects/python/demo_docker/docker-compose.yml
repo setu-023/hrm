@@ -76,12 +76,14 @@ services:
       links:
         - db:db
         - redis:redis
-      command: celery -A proj beat -l info
+      command: bash -c "cd src/ && celery -A hrm beat -l info"
       depends_on:
         - db
         - redis
+        
       volumes:
         - ./src:/app/src
+      
       environment:
         - DB_HOST=db
         - DB_USER=hrm
@@ -91,3 +93,4 @@ services:
         - DEBUG=True
         - SECRET_KEY=^&0zxq-&3)fqv^p+(^yp^@r5#0q!(5t1u1-zl70tiy1@f*wm0r
         - REDIS_HOST=redis
+
