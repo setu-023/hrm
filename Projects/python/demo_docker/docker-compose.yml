@@ -55,7 +55,7 @@ services:
       links:
         - db:db
         - redis:redis
-      command: bash -c "cd src/ && celery -A hrm.celery worker -l info --concurrency=4"
+      command: bash -c "cd src/ && rm -rf celerybeat.pid && celery -A hrm.celery worker -l info --concurrency=4"
       depends_on:
         - db
         - redis
@@ -76,7 +76,7 @@ services:
       links:
         - db:db
         - redis:redis
-      command: bash -c "cd src/ && celery -A hrm beat -l info"
+      command: bash -c "cd src/ && celery -A hrm.celery beat -l info"
       depends_on:
         - db
         - redis

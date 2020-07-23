@@ -6,9 +6,9 @@ from salary.serializers import SalarySerializer
 from salary.models import Salary
 
 
-@shared_task()
+@shared_task
 def get_total_salary():
-    time.sleep(3)
+    
     print('saved salary task started!!')
 
     salaries                    = Salary.objects.all()
