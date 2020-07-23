@@ -16,3 +16,5 @@ class Employee(BaseModel):
     email = None
     name  = None
 
+    class Meta:
+        db_table = 'employees'

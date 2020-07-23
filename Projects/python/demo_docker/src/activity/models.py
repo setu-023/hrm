@@ -12,4 +12,6 @@ class Activity(BaseModel):
     leave               = models.IntegerField()
     month               = models.DateTimeField()
 
+    class Meta:
+        db_table = 'activities'
 
