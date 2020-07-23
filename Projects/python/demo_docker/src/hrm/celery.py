@@ -12,16 +12,16 @@ celery_app = Celery('hrm')
 
 celery_app.config_from_object('django.conf:settings', namespace='CELERY')
 
-celery_app.conf.beat_schedule = {
-    'total_salary': {
-        'task': 'salary.tasks.get_total_salary',
-        #'schedule': crontab(),
-         'schedule': 5.0,
+# celery_app.conf.beat_schedule = {
+#     'total_salary': {
+#         'task': 'salary.tasks.get_total_salary',
+#         #'schedule': crontab(),
+#          'schedule': 5.0,
 
 
-        # 'args': ('hpatel@aaravtech.com','This is sample message.')
-    }
-}
+#         # 'args': ('hpatel@aaravtech.com','This is sample message.')
+#     }
+# }
 
 
 celery_app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

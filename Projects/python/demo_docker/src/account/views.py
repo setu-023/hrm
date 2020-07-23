@@ -1,20 +1,21 @@
 from django.db import IntegrityError
 from django.contrib.auth.hashers import check_password
 from django.conf import settings
+from django.http import Http404
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+
+
 from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.generics import ListCreateAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView,ListAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import Http404
 
-
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 
 import jwt
 from jwt.exceptions import InvalidTokenError, ExpiredSignatureError
-from django.conf import settings
 
 from account.api.serializers import AccountSerializer
 from account.models import Account
@@ -35,19 +36,20 @@ class UserListCreateAPIView(ListCreateAPIView):
     # def create(self, request, *args, **kwargs):
     #     try:
     #         #return Response ("hi")
-    #         account = Account.objects.create_account(
+    #         account = Account.objects.create(
 
     #             first_name=self.request.data['first_name'],
     #             last_name=self.request.data['last_name'],
     #             gender=self.request.data.get('gender', 'male'),
     #             email=self.request.data['email'],
-    #             password=self.request.data['password'],
+    #             # set_password=self.request.data['password'],
     #             username=self.request.data['username']
     #         )
+    #         account.set_password(request.data.get('new_password'))
 
     #         serializer = self.get_serializer(account)
  
-    #         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+    #         return Response({'msg':'okay'} , data=serializer.data, status=status.HTTP_201_CREATED)
     #     except Exception as e:
     #         print(e)
     #         return Response(data={'message': e}, status=status.HTTP_409_CONFLICT)

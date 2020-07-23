@@ -1,15 +1,16 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-
 from rest_framework.pagination import PageNumberPagination
 
 from salary.models import Salary
 from salary.serializers import SalarySerializer
-from base.permission import UserPermission
 from salary.tasks import get_total_salary
+from base.permission import UserPermission
+
 
 class SalaryListCreateAPIView(ListCreateAPIView):
 

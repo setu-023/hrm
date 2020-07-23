@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-
 from rest_framework.pagination import PageNumberPagination
 
 from project.models import Project
