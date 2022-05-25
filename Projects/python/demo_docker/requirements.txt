@@ -2,7 +2,7 @@ Django==2.2.7
 psycopg2-binary==2.8.4
 django-jet==1.0.8
 djangorestframework==3.11.0
-pyjwt==1.7.1
+pyjwt==2.4.0
 celery==4.4.1
 redis==3.4.1
 django-celery-beat==2.0.0
